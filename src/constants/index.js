@@ -1,7 +1,7 @@
-
-
-
-
+import { errorCodes } from "./errorCodes"
+const enumConstants = require('./enumConstants')
+const events = require('./events')
+const activityConstants = require('./activityConstants')
 
 const environment = {
   DEVELOPMENT: 'development',
@@ -46,4 +46,14 @@ const COMMUNICATION_PROVIDER = {
       BASE_URL: process.env.KARIX_BASE_URL
     }
   }
+}
+
+module.exports = {
+  ...errorCodes,
+  ...environment,
+  ...roles,
+  COMMUNICATION_PROVIDER,
+  events: events,
+  ENUM: enumConstants,
+  ACTIVITY: activityConstants
 }

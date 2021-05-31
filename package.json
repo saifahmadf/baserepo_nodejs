@@ -1,0 +1,24 @@
+{
+  "name": "baserepo_nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "Saif Ahmad Farooqui (email: saif.ahfarooqui@gmail.com)",
+  "license": "ISC",
+  "dependencies": {
+    "awilix": "^4.3.4",
+    "awilix-express": "^4.0.0",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.2.1",
+    "express-status-monitor": "^1.3.3",
+    "http-status": "^1.5.0",
+    "moment": "^2.29.1"
+  }
+}

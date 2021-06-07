@@ -29,9 +29,9 @@ const validateEnvFile = () => {
 
 const ENV = process.env.NODE_ENV || 'development'
 
-if(ENV !== 'production'){
-  validateEnvFile()
-}
+// if(ENV !== 'production'){
+//   validateEnvFile()
+// }
 
 const envConfig = require(path.join(__dirname, 'environments', ENV))
 

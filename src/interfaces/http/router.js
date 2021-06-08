@@ -17,7 +17,7 @@ module.exports = ({
     router.use(statusMonitor())
   }
 
-  router.use(loggerMiddleware())
+  // router.use(loggerMiddleware())
   const apiRouter = Router()
 
   apiRouter
@@ -37,7 +37,7 @@ module.exports = ({
     .use(compression())
     .use(containerMiddleware)
 
-  apiRouter.use('/testing', controller('health','health_check'))
-  router.use(`/api/v1/${config.version}`, apiRouter)
+  apiRouter.use('/healthCheck', controller('health_check','health_check_controller'))
+  router.use(`/api/${config.version}`, apiRouter)
   return router
 }

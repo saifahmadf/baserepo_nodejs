@@ -1,7 +1,7 @@
 import { define } from '../../../storageHelper'
 const HEALTH_CHECK = 'healthCheck'
 
-module.export = define('healthCheckService', ({ config }) => {
+module.exports = define('healthCheckService', ({ config }) => {
   let serverState = 'ACTIVE'
   
   const getState = async () => {

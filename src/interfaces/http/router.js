@@ -5,6 +5,8 @@ import compression from 'compression'
 import { Router } from 'express'
 import controller from './utils/create_controller'
 
+const cls = require('../../infra/cls/index')
+
 module.exports = ({
   config,
   containerMiddleware,
@@ -17,7 +19,7 @@ module.exports = ({
     router.use(statusMonitor())
   }
 
-  // router.use(loggerMiddleware())
+  router.use(loggerMiddleware)
   const apiRouter = Router()
 
   apiRouter
@@ -35,6 +37,7 @@ module.exports = ({
     )
     .use(json({ limit: '10mb' }))
     .use(compression())
+    .use(cls.middleware)
     .use(containerMiddleware)
 
   apiRouter.use('/healthCheck', controller('health_check','health_check_controller'))

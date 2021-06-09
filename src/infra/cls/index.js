@@ -22,8 +22,15 @@ const getNs = () => {
   return cls.getNamespace(nsid) || cls.createNamespace(nsid)
 }
 
+/** Express.js middleware that is responsible for initializing the context for each request. */
+const middleware = (req, res, next) => {
+  const ns = cls.getNamespace(nsid) || cls.createNamespace(nsid)
+  ns.run(() => next())
+}
+
 module.exports = {
   get: get,
   set: set,
-  getNs
+  getNs,
+  middleware
 }

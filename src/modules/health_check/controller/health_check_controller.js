@@ -9,9 +9,11 @@ module.exports = () => {
   //     Success
   //   }
   // } = container.cradle
-  const { healthCheckService } = container.cradle
+  const { healthCheckService, userContextMiddleware } = container.cradle
 
-  router.get('/getStatus', async (req, res, next) => {
+  // router.use(userContextMiddleware)
+
+  router.get('/getStatus' , async (req, res, next) => {
     try {
       const serverStatus = await healthCheckService.getState()
       if (serverStatus === 'ACTIVE'){
@@ -25,5 +27,6 @@ module.exports = () => {
       next(e)
     }
   })
-  
+
+  return router
 }

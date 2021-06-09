@@ -10,7 +10,7 @@ import RuntimeError from './infra/error/runtime'
 import loggerMiddleware from './interfaces/http/middlewares/http_logger'
 import errorHandlerMiddleware from './interfaces/http/middlewares/error_handler'
 import logger from './infra/logger/index'
-
+import userContextMiddleware from './interfaces/http/middlewares/usercontext_handler'
 
 const container = createContainer({
   injectionMode: InjectionMode.PROXY
@@ -39,6 +39,9 @@ container
   .register({
     containerMiddleware: asValue(scopePerRequest(container)),
     errorHandlerMiddleware: asFunction(errorHandlerMiddleware)
+  })
+  .register({
+    userContextMiddleware: asFunction(userContextMiddleware).singleton()
   })
 
 // infra

@@ -1,8 +1,6 @@
 import { resolve } from './src/storage'
 
 let moment = require('moment')
-// moment.tz.setDefault('UTC')
-// moment.tz.link('Asia/Calcutta|Asia/Kolkata')
 
 let environment = process.env.NODE_ENV || 'development'
 

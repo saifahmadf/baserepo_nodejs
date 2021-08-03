@@ -11,6 +11,7 @@ import loggerMiddleware from './interfaces/http/middlewares/http_logger'
 import errorHandlerMiddleware from './interfaces/http/middlewares/error_handler'
 import logger from './infra/logger/index'
 import userContextMiddleware from './interfaces/http/middlewares/usercontext_handler'
+const databaseConnector = require('./infra/mysql/database')
 
 const container = createContainer({
   injectionMode: InjectionMode.PROXY
@@ -49,6 +50,16 @@ container
   .register({
     RuntimeError: asFunction(RuntimeError).singleton()
   })
+
+// Database
+container.register({
+  databaseConnector: asFunction(databaseConnector).singleton()
+})  
+
+container.register({
+  database: asValue(container.cradle['databaseConnector'])
+})
+
 
 container.loadModules(['modules/**/repository/*.js'], {
   resolverOptions: {

@@ -1,0 +1,40 @@
+version: "3.6"
+
+services:
+  server:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports: 
+      - 8085:8085
+    depends_on:
+      - mysql
+      - redis
+      - mongo  
+
+      
+  mysql:
+    image: mysql:5
+    # environment:
+    #   - MYSQL_ROOT_PASSWORD=password@123
+    #   - MYSQL_DATABASE=whmain
+    #   - MYSQL_USER=api
+    #   - MYSQL_PASSWORD=password@123
+    volumes:
+      - ~/opt/mysql/data:/var/lib/mysql
+    ports: 
+      - 3306:3306
+  
+  redis:
+    image: redis
+    ports: 
+      - 6379:6379
+
+  mongo:
+    image: mongo
+    restart: always
+    # environment:
+    #   MONGO_INITDB_ROOT_USERNAME: root
+    #   MONGO_INITDB_ROOT_PASSWORD: password@123
+    ports: 
+    - 27017:27017

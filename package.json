@@ -5,7 +5,7 @@
   "main": "start.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node start.js"
+    "start": "nodemon start.js"
   },
   "keywords": [],
   "author": "Saif Ahmad Farooqui (email: saif.ahfarooqui@gmail.com)",
@@ -25,6 +25,7 @@
     "http-status": "^1.5.0",
     "moment": "^2.29.1",
     "mysql2": "^2.2.5",
+    "nodemon": "^2.0.12",
     "ramda": "^0.27.1",
     "sequelize": "^6.6.5",
     "underscore": "^1.13.1",

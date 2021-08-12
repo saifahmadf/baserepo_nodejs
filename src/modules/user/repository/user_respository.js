@@ -1,11 +1,11 @@
 import { define } from '../../../storageHelper'
 
-module.exports = define('healthCheckRepository', ({ database }) => {
+module.exports = define('userRepository', ({ database }) => {
   const userModel = database['user']
   
-  const insertUserDetails = (startRange, batchSize) => {
+  const insertUserDetails = () => {
     const query =
-      `insert into user values(3,"Farooqui","testing@testing.com","*****")`
+      `insert into user values(8,"Sdafdwereuddhanshu","gulmohar@gulmohar.com","*****")`
       return userModel.sequelize.query(query, {
         type: userModel.sequelize.QueryTypes.INSERT
       })

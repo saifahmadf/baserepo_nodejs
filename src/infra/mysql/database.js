@@ -33,7 +33,7 @@ module.exports = ({ logger, config }) => {
     db.Sequelize = Sequelize;
     db.sequelize = sequelize;
     
-    db.user = require("../../modules/health_check/dbmodel/user.js")(sequelize, Sequelize);
+    db.user = require("../../modules/user/dbmodel/user.js")(sequelize, Sequelize);
     
     return db
 }    

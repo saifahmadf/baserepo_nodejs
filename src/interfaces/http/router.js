@@ -41,6 +41,7 @@ module.exports = ({
     .use(containerMiddleware)
 
   apiRouter.use('/healthCheck', controller('health_check','health_check_controller'))
+  apiRouter.use('/user', controller('user','user_controller'))
   router.use(`/api/${config.version}`, apiRouter)
   return router
 }

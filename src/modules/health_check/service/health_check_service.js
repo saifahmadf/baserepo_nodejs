@@ -3,7 +3,7 @@ const HEALTH_CHECK = 'healthCheck'
 
 const pkg = require('../../../../package.json')
 
-module.exports = define('healthCheckService', ({ config, healthCheckRepository }) => {
+module.exports = define('healthCheckService', ({ config }) => {
   let serverState = 'ACTIVE'
   
   const getState = async () => {
@@ -12,12 +12,7 @@ module.exports = define('healthCheckService', ({ config, healthCheckRepository }
       status: currentServerStatus.serverState,
       version: pkg.version
     }
-    await insertNewUser()
     return healthCheckResponse
-  }
-
-  const insertNewUser = async () => {
-    await healthCheckRepository.insertUserDetails()
   }
 
   return {

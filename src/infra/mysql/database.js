@@ -19,15 +19,18 @@ module.exports = ({ logger, config }) => {
       host: dbConfig.HOST,
       dialect: dbConfig.dialect,
       operatorsAliases: false,
-    
       pool: {
         max: dbConfig.pool.max,
         min: dbConfig.pool.min,
         acquire: dbConfig.pool.acquire,
         idle: dbConfig.pool.idle
+      },
+      define: {
+        timestamps: false
       }
     });
     
+    sequelize.sync();
     const db = {};
     
     db.Sequelize = Sequelize;

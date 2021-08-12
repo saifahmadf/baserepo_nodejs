@@ -19,9 +19,11 @@ module.exports = (sequelize, DataTypes) => {
       }
     },  
     {
-      freezeTableName: true
+      freezeTableName: true,
+      sync: true
     }
   )
 
+  
   return User
 }

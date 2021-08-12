@@ -1,3 +1,3 @@
 export const moduleNames = [
-  'health_check']
+  'user']
 module.exports = moduleNames

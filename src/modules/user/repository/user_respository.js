@@ -11,7 +11,32 @@ module.exports = define('userRepository', ({ database }) => {
       })
   }
 
-  return {
-    insertUserDetails
+  const createUser = userDetails =>
+    userModel.sequelize.create(userDetails)
+
+  const updateUserById = (id, userDetails) =>
+    userModel.update(userDetails, { where: { id: id } })
+
+  const findUserById = (userId) => {
+    return userModel.findOne({
+      where: {
+        id: userId
+      }
+    })
   }
+
+  const findAllUserDetails = (params) => {
+    return userModel.findAll({
+      where: params
+    })
+  }
+
+  return {
+    insertUserDetails,
+    createUser,
+    updateUserById,
+    findUserById,
+    findAllUserDetails
+  }
+
 })

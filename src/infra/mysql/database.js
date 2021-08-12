@@ -1,29 +1,15 @@
 const Sequelize = require("sequelize")
 
 module.exports = ({ logger, config }) => {
-    const dbConfig = {
-        HOST: "localhost",
-        USER: "root",
-        PASSWORD: "",
-        DB: "testDB",
-        dialect: "mysql",
-        pool: {
-          max: 5,
-          min: 0,
-          acquire: 30000,
-          idle: 10000
-        }
-      };
-
-    const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
-      host: dbConfig.HOST,
-      dialect: dbConfig.dialect,
+    const sequelize = new Sequelize(config.dbConfig.DB, config.dbConfig.USER, config.dbConfig.PASSWORD, {
+      host: config.dbConfig.HOST,
+      dialect: config.dbConfig.dialect,
       operatorsAliases: false,
       pool: {
-        max: dbConfig.pool.max,
-        min: dbConfig.pool.min,
-        acquire: dbConfig.pool.acquire,
-        idle: dbConfig.pool.idle
+        max: config.dbConfig.pool.max,
+        min: config.dbConfig.pool.min,
+        acquire: config.dbConfig.pool.acquire,
+        idle: config.dbConfig.pool.idle
       },
       define: {
         timestamps: false
@@ -36,7 +22,12 @@ module.exports = ({ logger, config }) => {
     db.Sequelize = Sequelize;
     db.sequelize = sequelize;
     
-    db.user = require("../../modules/user/dbmodel/user.js")(sequelize, Sequelize);
+    let tableColln = require("../sequelize/db_exposed_models")
+    Object.keys(tableColln).forEach(module => {
+      tableColln[module].forEach(table => {
+        db[table] = require(`../../modules/${module}/dbmodel/${table}`)(sequelize, Sequelize)
+      })  
+    })
     
     return db
 }    

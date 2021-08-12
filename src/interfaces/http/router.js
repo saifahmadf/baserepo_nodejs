@@ -6,6 +6,8 @@ import { Router } from 'express'
 import controller from './utils/create_controller'
 
 const cls = require('../../infra/cls/index')
+const swaggerUi = require('swagger-ui-express')
+const swaggerDocument = require('./utils/swaggerConfig.json')
 
 module.exports = ({
   config,
@@ -42,6 +44,7 @@ module.exports = ({
 
   apiRouter.use('/healthCheck', controller('health_check','health_check_controller'))
   apiRouter.use('/user', controller('user','user_controller'))
+  apiRouter.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
   router.use(`/api/${config.version}`, apiRouter)
   return router
 }

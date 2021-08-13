@@ -5,9 +5,9 @@ module.exports = {
   HTTP_PROTOCOL: 'http',
   BASE_URL: 'http://localhost',
   dbConfig: {
-    HOST: "localhost",
+    HOST: "mysql",                  // change to localhost for local setup
     USER: "root",
-    PASSWORD: "",
+    PASSWORD: "password@123",       // change to "" for local setup
     DB: "testDB",
     dialect: "mysql",
     pool: {

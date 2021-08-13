@@ -10,16 +10,15 @@ services:
     depends_on:
       - mysql
       - redis
-      - mongo  
-
+      - mongo
       
   mysql:
     image: mysql:5
-    # environment:
-    #   - MYSQL_ROOT_PASSWORD=password@123
-    #   - MYSQL_DATABASE=whmain
-    #   - MYSQL_USER=api
-    #   - MYSQL_PASSWORD=password@123
+    environment:
+      - MYSQL_ROOT_PASSWORD=password@123
+      - MYSQL_DATABASE=testDB
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=password@123
     volumes:
       - ~/opt/mysql/data:/var/lib/mysql
     ports: 

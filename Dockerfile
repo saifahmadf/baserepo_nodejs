@@ -1,5 +1,7 @@
 FROM node:14-alpine
 
+RUN npm config set unsafe-perm true
+
 WORKDIR /app
 
 COPY package*.json  ./

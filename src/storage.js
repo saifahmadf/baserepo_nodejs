@@ -11,6 +11,7 @@ import loggerMiddleware from './interfaces/http/middlewares/http_logger'
 import errorHandlerMiddleware from './interfaces/http/middlewares/error_handler'
 import logger from './infra/logger/index'
 import userContextMiddleware from './interfaces/http/middlewares/usercontext_handler'
+import logDBConnection  from './infra/mongoose/index'
 const databaseConnector = require('./infra/mysql/database')
 
 const container = createContainer({
@@ -48,7 +49,8 @@ container
 // infra
 container
   .register({
-    RuntimeError: asFunction(RuntimeError).singleton()
+    RuntimeError: asFunction(RuntimeError).singleton(),
+    logDBConnection: asFunction(logDBConnection).singleton()
   })
 
 // Database
@@ -70,6 +72,15 @@ container.loadModules(['modules/**/repository/*.js'], {
 })
 
 container.loadModules(['modules/**/service/*.js'], {
+  resolverOptions: {
+    register: asFunction,
+    lifetime: Lifetime.SINGLETON
+  },
+  cwd: __dirname
+})
+
+// Mongo modules
+container.loadModules(['modules/**/schema/*.js', 'modules/**/docRepository/*.js'], {
   resolverOptions: {
     register: asFunction,
     lifetime: Lifetime.SINGLETON

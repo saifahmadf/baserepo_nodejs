@@ -9,7 +9,8 @@ module.exports = () => {
   router.get('/insertUser' , async (req, res, next) => {
     try {      
       // let result = await userService.findUserById(4)  //testing 
-      let result = await userService.insertUserDetails()
+      // let result = await userService.insertUserDetails()
+      let result = await userService.insertUserWorksheet(undefined)
       console.log("result::: ", result)
       res.status(Status.OK).json(result)
     } catch(e) {

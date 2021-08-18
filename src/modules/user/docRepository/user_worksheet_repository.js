@@ -6,37 +6,48 @@ const uuid = require('uuid')
 module.exports = define('userWorksheetRepository', ({ userDocument, logger }) => {
   const UserWorkSheetModel = userDocument.UserWorkSheetModel
 
+  const convertModelToJSON = (result) => {
+    if (result) {
+      result = result.toJSON()
+      result.id = result._id
+      delete result._id
+      return result
+    }
+    return result
+  }
+
   const getWorksheetDetailsById = async (worksheetId) => {
     logger.info(`user_worksheet getUserWorksheetDetailsById started`)
     let result = await WorkSheetModel.findById(worksheetId)
     if (!result) {
       return false
     }
-    result = result.toJSON()
-    logger.info(`user_worksheet getUserWorksheetDetailsById completed ${result}`)
+    result = convertModelToJSON(result)
+    logger.info(`user_worksheet getUserWorksheetDetailsById completed ${JSON.stringify(result)}`)
     return result
   }
 
   const createWorkSheet = async (worksheet) => {
-    worksheet._id = uuid.v4()
     worksheet = {
-      userId: 'sadfruewpoqiru',
+      userId: 'ahmad',
       email: 'testing',
       userTasks: { 
         'python': '3.7',
         'java': '18'
       }
     }
+    worksheet._id = uuid.v4()
+
     logger.info(`user_worksheet create :: createWorkSheet`)
     let createdWorksheet = await UserWorkSheetModel(worksheet).save()
-    createdWorksheet = createdWorksheet.toJSON()
-    logger.info(`user_worksheet created worksheets createWorkSheet result ${createdWorksheet}`)
+    createdWorksheet = convertModelToJSON(createdWorksheet)
+    logger.info(`user_worksheet created worksheets createWorkSheet result ${JSON.stringify(createdWorksheet)}`)
     return createdWorksheet
   }
 
   const updateWorksheet = async (worksheetId, worksheet) => {
     let dbWorksheet = await UserWorkSheetModel.findOneAndUpdate({ _id: worksheetId }, worksheet, { new: true })
-    const result = dbWorksheet.toJSON()
+    result = convertModelToJSON(dbWorksheet)
     return result
   }
   const getWorksheetForClass = async (worksheetId) => {

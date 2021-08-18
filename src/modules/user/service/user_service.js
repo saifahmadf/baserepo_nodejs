@@ -14,7 +14,7 @@ module.exports = define('userService', ({ userRepository, userWorksheetRepositor
 
   const insertUserWorksheet = async (userWorksheetDoc) => {
     let result = await userWorksheetRepository.createWorkSheet(userWorksheetDoc)
-
+    return result
   }
   return {
     findUserById,

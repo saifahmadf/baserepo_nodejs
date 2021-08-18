@@ -4,7 +4,7 @@ const helper = require('./mongodbHelper')
 module.exports = ({config, logger}) => {
   try{
     const { logMongoDB } = config
-    if(!logMongoDB || logMongoDB.host){
+    if(!logMongoDB || !logMongoDB.host){
       throw new Error('Log MongoDB config not found!!!')
     }
     const connObj = helper.getConnectionObject(logMongoDB, 'logMongoDB')
